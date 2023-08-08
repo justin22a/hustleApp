@@ -11,8 +11,13 @@ public class Posting {
     private String image;
     private String location;
     private String type; // buy or sell 
+    private String status; // pending, accepted, rejected, completed
+    private String date; // date of posting
+
+    public Posting() {
+    }
     
-    public Posting(String username, String productID, String name, String description, String category, String price, String quantity, String image, String location, String type) {
+    public Posting(String username, String productID, String name, String description, String category, String price, String quantity, String image, String location, String type, String status, String date) {
         this.username = username;
         this.productID = productID;
         this.name = name;
@@ -23,6 +28,9 @@ public class Posting {
         this.image = image;
         this.location = location;
         this.type = type;
+        this.status = status;
+        this.date = date;
+
     }
     
     public String getUsername() {
@@ -65,6 +73,14 @@ public class Posting {
         return type;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
     public void setUsername(String username) {
         this.username = username;
     }
@@ -101,7 +117,15 @@ public class Posting {
         this.type = type;
     }
 
-    
+    public void setStatus(String status) {
+        this.status= status;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+
     
     
 }

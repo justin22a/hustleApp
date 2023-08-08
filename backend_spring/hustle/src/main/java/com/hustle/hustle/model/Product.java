@@ -13,6 +13,9 @@ public class Product {
     private String username;
     private String location;
 
+    public Product() {
+    }
+
     public Product(String name, String productID, String description, String category, String price, BigInteger quantity, String image, String username, String location) {
         this.name = name;
         this.productID = productID;
@@ -97,6 +100,6 @@ public class Product {
         this.location = location;
     }
 
-    
+
 
 }
