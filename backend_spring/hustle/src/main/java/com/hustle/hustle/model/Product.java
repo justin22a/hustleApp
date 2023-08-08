@@ -2,21 +2,36 @@ package com.hustle.hustle.model;
 
 import java.math.BigInteger;
 
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
+import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.NotEmpty;
+
+
 public class Product {
+    @NotEmpty
     private String name;
-    private String productID;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long productID;
+    @Lob
     private String description;
     private String category;
     private String price;
     private BigInteger quantity;
     private String image;
-    private String username;
+    @ManyToOne
+    @JoinColumn(name = "username", referencedColumnName = "username")
+    private User user;
     private String location;
 
     public Product() {
     }
 
-    public Product(String name, String productID, String description, String category, String price, BigInteger quantity, String image, String username, String location) {
+    public Product(String name, Long productID, String description, String category, String price, BigInteger quantity, String image, User user, String location) {
         this.name = name;
         this.productID = productID;
         this.description = description;
@@ -24,7 +39,7 @@ public class Product {
         this.price = price;
         this.quantity = quantity;
         this.image = image;
-        this.username = username;
+        this.user = user;
         this.location = location;
     }
 
@@ -32,7 +47,7 @@ public class Product {
         return name;
     }
 
-    public String getProductID() {
+    public Long getProductID() {
         return productID;
     }
 
@@ -57,7 +72,7 @@ public class Product {
     }
 
     public String getUsername() {
-        return username;
+        return user.getUsername();
     }
 
     public String getLocation() {
@@ -68,7 +83,7 @@ public class Product {
         this.name = name;
     }
 
-    public void setProductID(String productID) {
+    public void setProductID(Long productID) {
         this.productID = productID;
     }
 
@@ -92,9 +107,6 @@ public class Product {
         this.image = image;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
 
     public void setLocation(String location) {
         this.location = location;

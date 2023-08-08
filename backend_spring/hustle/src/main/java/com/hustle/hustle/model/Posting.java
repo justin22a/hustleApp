@@ -1,15 +1,9 @@
 package com.hustle.hustle.model;
 
+import java.math.BigInteger;
+
 public class Posting {
-    private String username;
-    private String productID;
-    private String name;
-    private String description;
-    private String category;
-    private String price;
-    private String quantity;
-    private String image;
-    private String location;
+    private Product product;
     private String type; // buy or sell 
     private String status; // pending, accepted, rejected, completed
     private String date; // date of posting
@@ -17,16 +11,8 @@ public class Posting {
     public Posting() {
     }
     
-    public Posting(String username, String productID, String name, String description, String category, String price, String quantity, String image, String location, String type, String status, String date) {
-        this.username = username;
-        this.productID = productID;
-        this.name = name;
-        this.description = description;
-        this.category = category;
-        this.price = price;
-        this.quantity = quantity;
-        this.image = image;
-        this.location = location;
+    public Posting(Product p, String type, String status, String date) {
+        this.product = p;
         this.type = type;
         this.status = status;
         this.date = date;
@@ -34,39 +20,39 @@ public class Posting {
     }
     
     public String getUsername() {
-        return username;
+        return product.getUsername();
     }
     
-    public String getProductID() {
-        return productID;
+    public Long getProductID() {
+        return product.getProductID();
     }
     
     public String getName() {
-        return name;
+        return product.getName();
     }
     
     public String getDescription() {
-        return description;
+        return product.getDescription();
     }
     
     public String getCategory() {
-        return category;
+        return product.getCategory();
     }
     
     public String getPrice() {
-        return price;
+        return product.getPrice();
     }
     
-    public String getQuantity() {
-        return quantity;
+    public BigInteger getQuantity() {
+        return product.getQuantity();
     }
     
     public String getImage() {
-        return image;
+        return product.getImage();
     }
     
     public String getLocation() {
-        return location;
+        return product.getLocation();
     }
 
     public String getType() {
@@ -81,36 +67,8 @@ public class Posting {
         return date;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public void setProductID(String productID) {
-        this.productID = productID;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setCategory(String category) {
-        this.category= category;
-    }
-
-    public void setPrice(String price) {
-        this.price = price;
-    }
-
-    public void setQuantity(String quantity) {
-        this.quantity= quantity;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
     public void setLocation(String location) {
-        this.location = location;
+        product.setLocation(location);
     }
 
     public void setType(String type) {
