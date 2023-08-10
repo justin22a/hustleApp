@@ -1,6 +1,8 @@
 package com.hustle.hustle.model;
 
 import java.math.BigInteger;
+import java.math.BigDecimal;
+import java.util.List;
 
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -12,26 +14,30 @@ import jakarta.validation.constraints.NotEmpty;
 
 
 public class Product {
-    @NotEmpty
+    @NotEmpty(message = "Name cannot be empty")
     private String name;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long productID;
     @Lob
+    @NotEmpty(message = "Description cannot be empty")
     private String description;
-    private String category;
-    private String price;
+    private List<String> category;
+    @NotEmpty(message = "Price cannot be empty")
+    private BigDecimal price;
+    @NotEmpty(message = "Quantity cannot be empty")
     private BigInteger quantity;
     private String image;
     @ManyToOne
-    @JoinColumn(name = "username", referencedColumnName = "username")
+    @JoinColumn(name = "userID", referencedColumnName = "userID")
     private User user;
+    @NotEmpty(message = "Location cannot be empty")
     private String location;
 
     public Product() {
     }
 
-    public Product(String name, Long productID, String description, String category, String price, BigInteger quantity, String image, User user, String location) {
+    public Product(String name, Long productID, String description, List<String> category, BigDecimal price, BigInteger quantity, String image, User user, String location) {
         this.name = name;
         this.productID = productID;
         this.description = description;
@@ -55,11 +61,11 @@ public class Product {
         return description;
     }
 
-    public String getCategory() {
+    public List<String> getCategory() {
         return category;
     }
 
-    public String getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
@@ -91,11 +97,11 @@ public class Product {
         this.description = description;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(List<String> category) {
         this.category = category;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
