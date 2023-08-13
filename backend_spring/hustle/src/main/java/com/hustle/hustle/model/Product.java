@@ -4,13 +4,13 @@ import java.math.BigInteger;
 import java.math.BigDecimal;
 import java.util.List;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.Lob;
-import jakarta.persistence.ManyToOne;
-import jakarta.validation.constraints.NotEmpty;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.GenerationType;
+import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotEmpty;
 
 
 public class Product {
@@ -30,14 +30,14 @@ public class Product {
     private String image;
     @ManyToOne
     @JoinColumn(name = "userID", referencedColumnName = "userID")
-    private User user;
+    private UserProfile user;
     @NotEmpty(message = "Location cannot be empty")
     private String location;
 
     public Product() {
     }
 
-    public Product(String name, Long productID, String description, List<String> category, BigDecimal price, BigInteger quantity, String image, User user, String location) {
+    public Product(String name, Long productID, String description, List<String> category, BigDecimal price, BigInteger quantity, String image, UserProfile user, String location) {
         this.name = name;
         this.productID = productID;
         this.description = description;

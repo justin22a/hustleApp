@@ -1,35 +1,38 @@
 package com.hustle.hustle.model;
 
-import java.math.BigInteger;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
-public class User {
-    @Column(unique = true)
-    private BigInteger userID;
+@Table(name = "user_profile")
+public class UserProfile {
+    @Id
+    @GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
+    private Long id;
     private String username;
     private String name;
     private String email;
     private String phoneNumber;
     private String password;
 
-    public User() {
+    public UserProfile() {
     }
 
-    public User(BigInteger userID, String username, String name, String email, String phoneNumber) {
-        this.userID = userID;
+    public UserProfile(Long userID, String username, String name, String email, String phoneNumber) {
+        this.id = userID;
         this.username = username;
         this.name = name;
         this.email = email;
         this.phoneNumber = phoneNumber;
     }
 
-    public BigInteger getUserID() {
-        return userID;
+    public Long getUserID() {
+        return id;
     }
+
     public String getUsername() {
         return username;
     }
@@ -46,8 +49,8 @@ public class User {
         return phoneNumber;
     }
 
-    public void setUserID(BigInteger userID) {
-        this.userID = userID;
+    public void setUserID(Long userID) {
+        this.id = userID;
     }
 
     public void setUsername(String username) {
@@ -59,7 +62,7 @@ public class User {
     }
 
     public void setName(String name) {
-        this.name = name; 
+        this.name = name;
     }
 
     public void setEmail(String email) {
@@ -70,8 +73,7 @@ public class User {
         this.password = password;
     }
 
-    public String getPassword(){
+    public String getPassword() {
         return password;
     }
-
 }

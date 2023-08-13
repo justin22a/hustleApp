@@ -1,7 +1,7 @@
 package com.hustle.hustle.model;
 
 public class OfferComment {
-    private User user;
+    private UserProfile user;
     private String comment;
     private Long postID;
     private Long commentID;
@@ -14,7 +14,7 @@ public class OfferComment {
     }
     
     //sell comment
-    public OfferComment(User user, String comment, Long postID, Long commentID, String postedDate, String endDate, Product product, String type) {
+    public OfferComment(UserProfile user, String comment, Long postID, Long commentID, String postedDate, String endDate, Product product, String type) {
         this.user = user;
         this.comment = comment;
         this.postID = postID;
@@ -26,7 +26,7 @@ public class OfferComment {
     }
 
     //buy comment
-    public OfferComment(User user, String comment, Long postID, Long commentID, String postedDate, String endDate, String type) {
+    public OfferComment(UserProfile user, String comment, Long postID, Long commentID, String postedDate, String endDate, String type) {
         this.user = user;
         this.comment = comment;
         this.postID = postID;
@@ -68,7 +68,7 @@ public class OfferComment {
         return product.getName();
     }
 
-    public void setUser(User user) {
+    public void setUser(UserProfile user) {
         this.user = user;
     }
 
@@ -100,5 +100,5 @@ public class OfferComment {
         this.type = type;
     }
 
-    
+
 }

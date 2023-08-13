@@ -2,25 +2,27 @@ package com.hustle.hustle.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import com.hustle.hustle.model.User;
+import com.hustle.hustle.model.UserProfile;
 import java.util.Optional;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface UserRepository extends JpaRepository<UserProfile, Long> {
     
-    Optional<User> findByUsername(String username);
+    Optional<UserProfile> findByUsername(String username);
 
-    public User findByUserID(Long userID);
+    public void save(Optional<UserProfile> user);
 
-    public User findByEmail(String email);
+    Optional<UserProfile> findByid(Long userID);
 
-    public User findByPhoneNumber(String phoneNumber);
+    Optional<UserProfile> findByEmail(String email);
 
-    public User findByUsernameAndPassword(String username, String password);
+    Optional<UserProfile> findByPhoneNumber(String phoneNumber);
 
-    public User findByEmailAndPassword(String email, String password);
+    Optional<UserProfile> findByUsernameAndPassword(String username, String password);
 
-    public User findByPhoneNumberAndPassword(String phoneNumber, String password);
+    Optional<UserProfile> findByEmailAndPassword(String email, String password);
+
+    Optional<UserProfile> findByPhoneNumberAndPassword(String phoneNumber, String password);
     
 
 }

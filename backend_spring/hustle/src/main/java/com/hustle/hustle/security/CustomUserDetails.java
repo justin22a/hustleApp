@@ -2,6 +2,7 @@ package com.hustle.hustle.security;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
+import com.hustle.hustle.model.UserProfile;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -10,12 +11,12 @@ import java.util.Set;
 
 public class CustomUserDetails extends User {
 
-    private BigInteger userID;
+    private Long userID;
     private String name;
     private String email;
     private String phoneNumber;
 
-    public CustomUserDetails(BigInteger userID, String username, String password,
+    public CustomUserDetails(Long userID, String username, String password,
                              String name, String email, String phoneNumber) {
         super(username, password, new ArrayList<>());
         this.userID = userID;
@@ -24,7 +25,15 @@ public class CustomUserDetails extends User {
         this.phoneNumber = phoneNumber;
     }
 
-    public BigInteger getUserID() {
+    public CustomUserDetails(UserProfile user) {
+        super(user.getUsername(), user.getPassword(), new ArrayList<>());
+        this.userID = user.getUserID();
+        this.name = user.getName();
+        this.email = user.getEmail();
+        this.phoneNumber = user.getPhoneNumber();
+    }
+
+    public Long getUserID() {
         return userID;
     }
  // has getUserName() and getPassword() from User class
@@ -40,9 +49,8 @@ public class CustomUserDetails extends User {
         return phoneNumber;
     }
 
-    public com.hustle.hustle.model.User getUser() {
-        com.hustle.hustle.model.User user = new com.hustle.hustle.model.User(userID, getUsername(), name, email, phoneNumber);
-        return user;
+    public UserProfile getUser() {
+        return new UserProfile(userID, getUsername(), name, email, phoneNumber);
     }
 }
 

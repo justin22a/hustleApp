@@ -2,14 +2,14 @@ package com.hustle.hustle.model;
 
 import java.math.BigInteger;
 
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 
 public class Interaction {
     @ManyToOne
     @JoinColumn(name = "userID", referencedColumnName = "userId")
-    private User user;
+    private UserProfile user;
     private String category;
     private BigInteger quantity;
 
@@ -17,7 +17,7 @@ public class Interaction {
     public Interaction() {
     }
 
-    public Interaction(User user, String category, BigInteger quantity) {
+    public Interaction(UserProfile user, String category, BigInteger quantity) {
         this.user = user;
         this.category = category;
         this.quantity = quantity;
@@ -35,7 +35,7 @@ public class Interaction {
         return quantity;
     }
 
-    public void setUser(User user) {
+    public void setUser(UserProfile user) {
         this.user = user;
     }
 
@@ -46,7 +46,7 @@ public class Interaction {
     public void setQuantity(BigInteger quantity) {
         this.quantity = quantity;
     }
-    
+
 
 
 }
