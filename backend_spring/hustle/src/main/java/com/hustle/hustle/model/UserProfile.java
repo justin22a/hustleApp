@@ -12,6 +12,7 @@ public class UserProfile {
     @Id
     @GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
     private Long id;
+    @Column(unique = true)
     private String username;
     private String name;
     private String email;

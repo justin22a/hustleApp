@@ -5,12 +5,17 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import javax.persistence.Id;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "posting")
 public class Posting {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long postID;
@@ -24,6 +29,7 @@ public class Posting {
     private String date; // date of posting
     private String endDate; // date of completion
     private String location;
+    private String username;
 
     public Posting() {
     }
@@ -38,10 +44,11 @@ public class Posting {
         this.postDescription = postDescription;
         this.location = p.getLocation();
         this.endDate = endDate;
+        this.username = p.getUsername();
     }
 
     //buy posting
-    public Posting(String type, String status, String date, List<String> category, String postDescription, String location, String endDate) {   
+    public Posting(String type, String status, String date, List<String> category, String postDescription, String location, String endDate, String username) {   
         this.type = type;
         this.status = status;
         this.date = date;
@@ -49,6 +56,7 @@ public class Posting {
         this.postDescription = postDescription;
         this.location = location;
         this.endDate = endDate;
+        this.username = username;
     }
     
     public String getUsername() {
@@ -59,8 +67,8 @@ public class Posting {
         return product.getProductID();
     }
     
-    public String getName() {
-        return product.getName();
+    public String getTitle() {
+        return product.getTitle();
     }
     
     public String getDescription() {

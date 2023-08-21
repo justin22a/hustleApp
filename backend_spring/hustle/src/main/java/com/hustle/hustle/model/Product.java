@@ -4,18 +4,21 @@ import java.math.BigInteger;
 import java.math.BigDecimal;
 import java.util.List;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.GenerationType;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
-
+@Entity
+@Table(name = "product")
 public class Product {
     @NotEmpty(message = "Name cannot be empty")
-    private String name;
+    private String title;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long productID;
@@ -38,7 +41,7 @@ public class Product {
     }
 
     public Product(String name, Long productID, String description, List<String> category, BigDecimal price, BigInteger quantity, String image, UserProfile user, String location) {
-        this.name = name;
+        this.title = name;
         this.productID = productID;
         this.description = description;
         this.category = category;
@@ -49,8 +52,8 @@ public class Product {
         this.location = location;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
     public Long getProductID() {
@@ -85,8 +88,8 @@ public class Product {
         return location;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String name) {
+        this.title = name;
     }
 
     public void setProductID(Long productID) {

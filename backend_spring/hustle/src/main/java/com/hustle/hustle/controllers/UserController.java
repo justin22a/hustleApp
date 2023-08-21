@@ -1,6 +1,7 @@
 package com.hustle.hustle.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -9,11 +10,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.hustle.hustle.model.UserProfile;
 import com.hustle.hustle.model.DTOs.LoginRequestDTO;
 import com.hustle.hustle.model.DTOs.ProfileResponseDTO;
 import com.hustle.hustle.model.DTOs.RegistrationRequestDTO;
 import com.hustle.hustle.security.AuthResponse;
+import com.hustle.hustle.security.CustomUserDetails;
 import com.hustle.hustle.security.TokenRenewalRequestDTO;
+import com.hustle.hustle.security.UserDetailsServiceImpl;
 import com.hustle.hustle.services.UserService;
 
 @RestController
@@ -22,6 +28,7 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
     
 
     @PostMapping("/register")
@@ -32,23 +39,34 @@ public class UserController {
         return ResponseEntity.ok("User registered successfully");
     }
 
-    @PostMapping("/login")
+    @PostMapping(value = "/login", produces = "application/json", consumes = "application/json")
     public ResponseEntity<AuthResponse> login(@RequestBody LoginRequestDTO loginRequest) {
         AuthResponse authResponse = userService.login(loginRequest);
         return ResponseEntity.ok(authResponse);
     }
 
     @PostMapping("/renew-token")
-    public ResponseEntity<AuthResponse> renewToken(@RequestBody TokenRenewalRequestDTO tokenRenewalRequest) {
+    public ResponseEntity<String> renewToken(@RequestBody TokenRenewalRequestDTO tokenRenewalRequest) {
         AuthResponse authResponse = userService.renewToken(tokenRenewalRequest);
-        return ResponseEntity.ok(authResponse);
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            String jsonAuthResponse = objectMapper.writeValueAsString(authResponse);
+            return ResponseEntity.ok(jsonAuthResponse);
+        } catch (JsonProcessingException e) {
+            // Handle the exception gracefully
+            String errorMessage = "Error serializing AuthResponse to JSON";
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(errorMessage);
+        }
     }
 
     @GetMapping("/profile/{username}")
     public ResponseEntity<ProfileResponseDTO> getUserProfile(@PathVariable String username) {
-        //get CustomUserDetails from the userDetailsServiceImpl
-        // Retrieve user entity from the database
+        //get UserProfile from the user service
+        UserProfile userProfile = userService.getUserProfile(username);
         // Convert user entity to ProfileResponseDTO
+        
+        // Return the ProfileResponseDTO
         return ResponseEntity.ok(new ProfileResponseDTO());
     }
 }
