@@ -16,13 +16,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from backend_django.hustleproject.hustleapp.views import CustomLoginView, UserProfileView
+from backend_django.hustleproject.hustleapp.views import UserProfileView
 
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path('login/', CustomLoginView.as_view(), name='login'),
-    path('user-profile/', UserProfileView.as_view(), name='user-profile'),
+    path('login/', api_login, name='login'),
+    path('<str:username>/', UserProfileView.as_view(), name='user-profile'),
     # Add other URL patterns
 ]
 

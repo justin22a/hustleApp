@@ -1,7 +1,9 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     username = models.CharField(max_length=100)
     email = models.EmailField()
     phone_number = models.CharField(max_length=20)
@@ -35,7 +37,7 @@ class Product(models.Model):
     image = models.ImageField(upload_to='products')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    userName = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+    user_profile = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
     
     def __str__(self):
         return self.name
@@ -56,14 +58,14 @@ class Product(models.Model):
         return self.updated_at
     
     def __str__(self):
-        return self.userName
+        return self.user_profile
 
 class Post(models.Model):
     title = models.CharField(max_length=100)
     content = models.TextField()
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
-    username = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+    user_profile = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
     type = models.CharField(max_length=100)
 
     
@@ -80,13 +82,13 @@ class Post(models.Model):
         return self.created_at
     
     def __str__(self):
-        return self.username
+        return self.user_profile
     
 
 
 class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    username = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+    user_profile = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
     text = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     type = models.CharField(max_length=100)

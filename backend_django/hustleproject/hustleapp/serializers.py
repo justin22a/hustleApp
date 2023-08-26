@@ -19,9 +19,6 @@ class CommentSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class UserProfileSerializer(serializers.ModelSerializer):
-    products = ProductSerializer(many=True, read_only=True)
-    postings = PostingSerializer(many=True, read_only=True)
-
     class Meta:
         model = UserProfile
         fields = '__all__'
